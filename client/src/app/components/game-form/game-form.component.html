@@ -1,5 +1,5 @@
 <div class="col-md-4 offset-md-2">
-    <div class="card">
+    <div class="card mt-3">
         <div class="card-body">
             <form>
                 <div class="form-group">
@@ -20,7 +20,7 @@
 </div>
 
 <div class="col-md-4">
-    <div class="card card-body text-center">
+    <div class="card card-body text-center mt-3">
         <img [src]="game.image == '' ? '/assets/NoImage.png' : game.image" class="card-img-top">
         <h3>{{game.id}}, {{game.title == '' ? 'Game Title' : game.title}}</h3>
         <p> {{game.description == '' ? 'Write Your Description' : game.description}}
