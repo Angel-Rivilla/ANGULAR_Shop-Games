@@ -1,7 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Game } from 'src/app/models/Game';
-
 import { GamesService } from '../../services/games.service';
 
 

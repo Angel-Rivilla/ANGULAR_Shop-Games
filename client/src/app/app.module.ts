@@ -9,13 +9,20 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { GameFormComponent } from './components/game-form/game-form.component';
 import { GameListComponent } from './components/game-list/game-list.component';
 
-import { GamesService} from './services/games.service'
+import { GamesService} from './services/games.service';
+import { AuthService} from './services/auth.service';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
     GameFormComponent,
-    GameListComponent
+    GameListComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +31,8 @@ import { GamesService} from './services/games.service'
     FormsModule
   ],
   providers: [
-    GamesService
+    GamesService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

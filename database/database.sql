@@ -13,3 +13,12 @@ CREATE TABLE game(
 RENAME TABLE game to game;
 
 DESCRIBE game;
+
+CREATE TABLE user(
+    idUser INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(180),
+    email VARCHAR(180),
+    password VARCHAR(255)
+);
+
+DESCRIBE user;
