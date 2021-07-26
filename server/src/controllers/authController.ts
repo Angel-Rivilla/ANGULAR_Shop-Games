@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import pool from '../database';
+import * as jwt from 'jsonwebtoken';
+import config  from '../config/config';
 
 
 class AuthController {
@@ -17,6 +19,9 @@ class AuthController {
                 res.status(400).json({message:'Username or password incorrect!'})
             }
         }
+
+        //const token = jwt.sign({username, password}, config.jwtSecret,{expiresIn: '1h'});
+        //res.json({message: 'OK', token});
     };
 
     public async estaEnBD(username: string, password: string){

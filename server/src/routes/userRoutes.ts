@@ -1,6 +1,6 @@
 import { Router} from 'express';
 import userController from '../controllers/userController';
-
+import {checkJwt} from './../middlewares/jwt';
 
 class UsersRoutes{
    public router: Router = Router();

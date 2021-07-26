@@ -30,6 +30,8 @@ class AuthController {
                     res.status(400).json({ message: 'Username or password incorrect!' });
                 }
             }
+            //const token = jwt.sign({username, password}, config.jwtSecret,{expiresIn: '1h'});
+            //res.json({message: 'OK', token});
         });
     }
     ;
