@@ -16,14 +16,17 @@ const database_1 = __importDefault(require("../database"));
 class AuthController {
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { username, password } = req.body;
+            const username = req.body.username;
+            const password = req.body.password;
+            const usernameBd = yield database_1.default.query('SELECT password FROM user WHERE username = ?', [username]);
+            const passwordBd = yield database_1.default.query('SELECT password FROM user WHERE password = ?', [password]);
             const user = yield database_1.default.query('SELECT * FROM user WHERE username = ?', [username]);
             if (!(username && password)) {
                 res.status(400).json({ message: 'Username & Password are required!' });
             }
             else {
                 //Comparar si existe en la BD
-                if (username == 'admin' && password == 'admin') {
+                if (username == usernameBd && password == passwordBd) {
                     res.send(user);
                 }
                 else {
@@ -35,17 +38,6 @@ class AuthController {
         });
     }
     ;
-    estaEnBD(username, password) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let encontrado;
-            const usernameBd = yield database_1.default.query('SELECT username FROM user');
-            const passwordBd = yield database_1.default.query('SELECT password FROM user');
-            if (username == usernameBd && password == passwordBd) {
-                encontrado = true;
-            }
-            return encontrado;
-        });
-    }
 }
 const authController = new AuthController();
 exports.default = authController;

@@ -5,15 +5,19 @@ import config  from '../config/config';
 
 
 class AuthController {
+
     public async login (req: Request, res: Response) {
-        const {username, password} = req.body;
+        const username = req.body.username;
+        const password = req.body.password;
+        const usernameBd = await pool.query('SELECT password FROM user WHERE username = ?', [username]);
+        const passwordBd = await pool.query('SELECT password FROM user WHERE password = ?', [password]);
         const user = await pool.query('SELECT * FROM user WHERE username = ?', [username]);
 
         if(!(username && password)){
             res.status(400).json({message: 'Username & Password are required!'});
         } else {
             //Comparar si existe en la BD
-            if(username == 'admin' && password == 'admin'){
+            if(username == usernameBd && password == passwordBd){
                 res.send(user);
             } else {
                 res.status(400).json({message:'Username or password incorrect!'})
@@ -23,18 +27,6 @@ class AuthController {
         //const token = jwt.sign({username, password}, config.jwtSecret,{expiresIn: '1h'});
         //res.json({message: 'OK', token});
     };
-
-    public async estaEnBD(username: string, password: string){
-        let encontrado;
-        const usernameBd = await pool.query('SELECT username FROM user');
-        const passwordBd = await pool.query('SELECT password FROM user');
-
-        if(username == usernameBd && password == passwordBd){
-            encontrado = true;
-        }
-
-        return encontrado;
-    }
 }
 
 const authController = new AuthController();
